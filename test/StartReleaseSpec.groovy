@@ -8,6 +8,18 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
         startReleasePipeline.getBinding().setVariable( "scm", null )
     }
 
+    def "should not start release when branch is not develop"() {
+        given:
+        startReleasePipeline.getBinding().setVariable( "BRANCH_NAME", "master" )
+
+        when:
+        startReleasePipeline()
+
+        then:
+        1 * getPipelineMock("sh")("mvn clean verify")
+        0 * getPipelineMock("sh")("mvn gitflow:release-start")
+    }
+
     def "should start release when branch is develop"() {
         given:
         startReleasePipeline.getBinding().setVariable( "BRANCH_NAME", "develop" )
@@ -16,6 +28,7 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
         startReleasePipeline()
 
         then:
-        1 * getPipelineMock("sh")("mvn clean install -X")
+        1 * getPipelineMock("sh")("mvn clean verify")
+        1 * getPipelineMock("sh")("mvn gitflow:release-start")
     }
 }
