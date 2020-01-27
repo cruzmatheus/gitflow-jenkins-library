@@ -1,0 +1,13 @@
+target
+.classpath
+.project
+.settings
+.checkstyle
+*.ipr
+*.iml
+*.iws
+.idea
+*.pyc
+build.log
+**/*.versionsBackup
+.DS_Store
