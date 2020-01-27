@@ -17,7 +17,7 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
 
         then:
         1 * getPipelineMock("sh")("mvn clean verify")
-        0 * getPipelineMock("sh")("mvn gitflow:release-start")
+        0 * getPipelineMock("sh")("mvn gitflow:release-start --batch-mode")
     }
 
     def "should start release when branch is develop"() {
@@ -29,6 +29,6 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
 
         then:
         1 * getPipelineMock("sh")("mvn clean verify")
-        1 * getPipelineMock("sh")("mvn gitflow:release-start")
+        1 * getPipelineMock("sh")("mvn gitflow:release-start --batch-mode")
     }
 }

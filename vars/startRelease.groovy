@@ -8,7 +8,7 @@ def call(Map params) {
         }
         stage("Starting release") {
             if (BRANCH_NAME == "develop") {
-                sh("mvn gitflow:release-start")
+                sh("mvn gitflow:release-start --batch-mode")
             }
         }
     }
