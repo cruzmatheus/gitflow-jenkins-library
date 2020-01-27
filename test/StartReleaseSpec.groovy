@@ -1,4 +1,5 @@
 import com.homeaway.devtools.jenkins.testing.JenkinsPipelineSpecification
+import com.github.cruzmatheus.commands.GitFlowCommands
 
 class StartReleaseSpec extends JenkinsPipelineSpecification {
     def startReleasePipeline = null
@@ -17,7 +18,7 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
 
         then:
         1 * getPipelineMock("sh")("mvn clean verify")
-        0 * getPipelineMock("sh")("mvn gitflow:release-start --batch-mode")
+        0 * getPipelineMock("sh")(GitFlowCommands.START_RELEASE_COMMAND)
     }
 
     def "should start release when branch is develop"() {
@@ -29,6 +30,6 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
 
         then:
         1 * getPipelineMock("sh")("mvn clean verify")
-        1 * getPipelineMock("sh")("mvn gitflow:release-start --batch-mode")
+        1 * getPipelineMock("sh")(GitFlowCommands.START_RELEASE_COMMAND)
     }
 }

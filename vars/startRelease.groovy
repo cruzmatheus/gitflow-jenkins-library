@@ -1,3 +1,7 @@
+import com.github.cruzmatheus.commands.GitFlowCommands
+
+com.github.cruzmatheus.commands.GitFlowCommands
+
 def call(Map params) {
     node {
         stage ("Checkout") {
@@ -8,7 +12,7 @@ def call(Map params) {
         }
         stage("Starting release") {
             if (BRANCH_NAME == "develop") {
-                sh("mvn gitflow:release-start --batch-mode")
+                sh(GitFlowCommands.START_RELEASE_COMMAND)
             }
         }
     }
