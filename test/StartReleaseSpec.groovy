@@ -7,6 +7,8 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
     def setup() {
         startReleasePipeline = loadPipelineScriptForTest("vars/startRelease.groovy")
         startReleasePipeline.getBinding().setVariable( "scm", null )
+        explicitlyMockPipelineStep("readMavenPom")() >> [version: "1.0.0-SNAPSHOT"]
+        explicitlyMockPipelineStep("writeMavenPom")
     }
 
     def "should not start release when branch is not develop"() {
@@ -30,6 +32,11 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
 
         then:
         1 * getPipelineMock("sh")("mvn clean verify")
-        1 * getPipelineMock("sh")(GitFlowCommands.START_RELEASE_COMMAND)
+        1 * getPipelineMock("sh")("git checkout -b release/1.0.0-SNAPSHOT")
+        1 * getPipelineMock("sh")("git commit -m \"Changing version from 1.0.0-SNAPSHOT to 1.0.0\"")
+        1 * getPipelineMock("sh")("git push origin release/1.0.0")
+        1 * getPipelineMock("sh")("git checkout develop")
+        1 * getPipelineMock("sh")("git commit -m \"Changing version from 1.0.0-SNAPSHOT to 1.0.1-SNAPSHOT\"")
+        1 * getPipelineMock("sh")("git push origin develop")
     }
 }
