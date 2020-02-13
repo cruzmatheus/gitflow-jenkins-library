@@ -6,9 +6,9 @@ def newVersion
 
 def call(Map params) {
     node {
-        pom = readMavenPom()
         stage ("Checkout") {
             checkout scm
+            pom = readMavenPom()
         }
         stage("Build") {
             sh("mvn clean verify")
