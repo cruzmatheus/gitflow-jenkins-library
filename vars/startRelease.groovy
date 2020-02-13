@@ -10,9 +10,9 @@ def call(Map params) {
             checkout scm
             pom = readMavenPom()
         }
-        stage("Build") {
-            sh("mvn clean verify")
-        }
+//        stage("Build") {
+//            sh("mvn clean verify")
+//        }
         stage("Starting release") {
             if (BRANCH_NAME == "develop") {
                 sh(GitFlowCommands.startReleaseCommand(pom.version).trim())
