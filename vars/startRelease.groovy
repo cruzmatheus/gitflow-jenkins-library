@@ -15,13 +15,13 @@ def call(Map params) {
 //        }
         stage("Starting release") {
             if (BRANCH_NAME == "develop") {
-                sh(GitFlowCommands.startReleaseCommand(pom.version).trim())
+                olderVersion = pom.version.toString()
+                newVersion = olderVersion.replace("-SNAPSHOT", "")
+                sh(GitFlowCommands.startReleaseCommand(newVersion).trim())
             }
         }
         stage("Removing SNAPSHOT suffix") {
             if (BRANCH_NAME == "develop") {
-                olderVersion = pom.version.toString()
-                newVersion = olderVersion.replace("-SNAPSHOT", "")
                 writeMavenPom model: pom
             }
         }

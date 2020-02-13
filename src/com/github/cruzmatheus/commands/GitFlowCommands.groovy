@@ -8,7 +8,7 @@ class GitFlowCommands {
     }
 
     static String commitNewPomVersionCommand(olderVersion, newVersion) {
-        return "git commit -m \"Changing version from ${olderVersion} to ${newVersion}\""
+        return "git commit -am \"Changing version from ${olderVersion} to ${newVersion}\""
     }
 
     static String switchToDevelopBranchCommand() {

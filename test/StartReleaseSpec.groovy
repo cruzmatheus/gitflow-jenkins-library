@@ -31,12 +31,12 @@ class StartReleaseSpec extends JenkinsPipelineSpecification {
         startReleasePipeline()
 
         then:
-        1 * getPipelineMock("sh")("mvn clean verify")
-        1 * getPipelineMock("sh")("git checkout -b release/1.0.0-SNAPSHOT")
-        1 * getPipelineMock("sh")("git commit -m \"Changing version from 1.0.0-SNAPSHOT to 1.0.0\"")
+//        1 * getPipelineMock("sh")("mvn clean verify")
+        1 * getPipelineMock("sh")("git checkout -b release/1.0.0")
+        1 * getPipelineMock("sh")("git commit -am \"Changing version from 1.0.0-SNAPSHOT to 1.0.0\"")
         1 * getPipelineMock("sh")("git push origin release/1.0.0")
         1 * getPipelineMock("sh")("git checkout develop")
-        1 * getPipelineMock("sh")("git commit -m \"Changing version from 1.0.0-SNAPSHOT to 1.0.1-SNAPSHOT\"")
+        1 * getPipelineMock("sh")("git commit -am \"Changing version from 1.0.0-SNAPSHOT to 1.0.1-SNAPSHOT\"")
         1 * getPipelineMock("sh")("git push origin develop")
     }
 }
