@@ -45,8 +45,10 @@
 		<log.slf4j.version>1.7.25</log.slf4j.version>
 		
 		<surefire.pluginVersion>2.22.0</surefire.pluginVersion>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
 		
@@ -280,6 +282,18 @@
 				<version>1.14.0</version>
 				<configuration>
 					<!-- optional configuration -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>
