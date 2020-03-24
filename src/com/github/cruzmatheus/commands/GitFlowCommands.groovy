@@ -7,6 +7,10 @@ class GitFlowCommands {
         return "git checkout -b release/${pomVersion}"
     }
 
+    static String changePomVersionCommand(pomVersion) {
+        return "mvn versions:set -DgenerateBackupPoms=false -DnewVersion=${pomVersion}"
+    }
+
     static String commitNewPomVersionCommand(olderVersion, newVersion) {
         return "git commit -am \"Changing version from ${olderVersion} to ${newVersion}\""
     }
